@@ -143,9 +143,11 @@ typedef NS_ENUM (NSInteger, IGListBatchUpdateTransactionMode) {
             [self _reload];
         } else if (self.sectionData && [self.collectionView numberOfSections] != self.sectionData.fromObjects.count) {
             // If data is nil, there are no section updates.
-            IGWarnAssert(@"The UICollectionView's section count (%li) didn't match the IGListAdapter's count (%li), so we can't performBatchUpdates. Falling back to reloadData.",
-                         (long)[self.collectionView numberOfSections],
-                         (long)self.sectionData.fromObjects.count);
+            NSString *numberOfSections = [NSString stringWithFormat:@"%zd", [self.collectionView numberOfSections]];
+            NSString *sectionCount = [NSString stringWithFormat:@"%zd", self.sectionData.fromObjects.count];
+            IGWarnAssert(@"The UICollectionView's section count (%@) didn't match the IGListAdapter's count (%@), so we can't performBatchUpdates. Falling back to reloadData.",
+                         numberOfSections,
+                         sectionCount);
             [self _reload];
         } else {
             [self _applyDiff:diffResult];
