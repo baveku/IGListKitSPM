@@ -23,7 +23,11 @@ typedef NS_OPTIONS (NSInteger, IGListExperiment) {
     /// Test skipping creating {view : section controller} map, which has inconsistency issue.
     IGListExperimentSkipViewSectionControllerMap = 1 << 4,
     /// Use the correct section index when calling -[IGListAdapter reloadObjects ...] within the update block.
-    IGListExperimentFixCrashOnReloadObjects = 1 << 5
+    IGListExperimentFixCrashOnReloadObjects = 1 << 5,
+    /// Test keeping a strong pointer to the collectionView.dataSource during a batch update to avoid a crash
+    IGListExperimentKeepPointerToCollectionViewDataSource = 1 << 6,
+    /// Throw NSInternalInconsistencyException during an update
+    IGListExperimentThrowOnInconsistencyException = 1 << 7
 };
 
 /**
